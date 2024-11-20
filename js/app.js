@@ -25,7 +25,7 @@ let menuItems = [
         type: 'appetizers',
         item: 'salmon dip',
         desc: 'fresh salmon spread and toast',
-        imgUrl: '',
+        imgUrl: 'smokesalmon.jpeg',
         price: 10.99,
         qty: 0
     },
@@ -34,8 +34,8 @@ let menuItems = [
         type: 'appetizers',
         item: 'onion rings',
         desc: 'deep fried onion rings with comeback sauce',
-        imgUrl: '',
-        price: '',
+        imgUrl: 'onion.jpeg',
+        price: '100.00',
         qty: 0
     },
     {
@@ -43,7 +43,7 @@ let menuItems = [
         type: 'appetizers',
         item: 'cheeses stick',
         desc: 'deep fried cheeses ',
-        imgUrl: '',
+        imgUrl: 'sticks.jpeg',
         price: '4.99',
         qty: 0
     },
@@ -52,12 +52,12 @@ let menuItems = [
         type: 'appetizers',
         item: ' hot wings',
         desc: ' fry wings with buffalo sauce',
-        imgUrl: '',
+        imgUrl: 'wings.jpeg',
         price: '12.99',
         qty: 0
     },
     {
-        id: 1,
+        id: 5,
         type: 'entrees',
         item: 'hamburgers',
         desc: 'fresh grill beef',
@@ -67,7 +67,7 @@ let menuItems = [
     },
     {
         
-        id: 2,
+        id: 6,
         type: 'entrees',
         item: 'grill chicken',
         desc: 'off the grill chicken that still be dry',
@@ -76,7 +76,7 @@ let menuItems = [
         qty: 0
     },
     {
-        id: 3,
+        id: 7,
         type: 'entrees',
         item: 'pizza',
         desc: 'hot and ready pizza just like your mate',
@@ -85,7 +85,7 @@ let menuItems = [
         qty: 0
     },
     {
-        id: 4,
+        id: 8,
         type: 'entrees',
         item: 'pork bbq ribs',
         desc: 'ribs so good you going to want to rub it on your momma back',
@@ -94,7 +94,7 @@ let menuItems = [
         qty: 0
     },
     {
-        id: 1,
+        id: 9,
         type: 'drinks',
         item: 'coke',
         desc: 'ice cold drink that make you want to try the real thang',
@@ -103,7 +103,7 @@ let menuItems = [
         qty: 0
     },
     {
-        id: 2,
+        id: 10,
         type: 'drinks',
         item: 'sprite',
         desc: 'lemon lime drink with burn acid',
@@ -112,7 +112,7 @@ let menuItems = [
         qty: 0
     },
     {
-        id: 3,
+        id: 11,
         type: 'drinks',
         item: 'red wine',
         desc: 'sweet drink that have you to miss him',
@@ -121,7 +121,7 @@ let menuItems = [
         qty: 0
     },
     {
-        id: 4,
+        id: 12,
         type: 'drinks',
         item: 'water',
         desc: 'plain like my ex',
@@ -130,7 +130,7 @@ let menuItems = [
         qty: 0
     },
     {
-        id: 1,
+        id: 13,
         type: 'desserts',
         item: 'chocolet cake',
         desc: 'fresh bake double chocolet cake that built like my ex ',
@@ -139,7 +139,7 @@ let menuItems = [
         qty: 0
     },
     {
-        id: 2,
+        id: 14,
         type: 'desserts',
         item: 'chocolet chip cookie',
         desc: 'fresh bake thick cookie with extra chocolet...I should call her ',
@@ -148,7 +148,7 @@ let menuItems = [
         qty: 0
     },
     {
-        id: 3,
+        id: 15,
         type: 'desserts',
         item: 'vanilla ice cream',
         desc: 'cold just like your ex who left for chocolet',
@@ -157,16 +157,25 @@ let menuItems = [
         qty: 0
     },
     {
-        id: 4,
-        type: 'vanilla and chocolet cookie',
-        item: '',
-        desc: 'when she like both',
+        id: 16,
+        type: 'desserts',
+        item: 'milk shake',
+        desc: '',
         imgUrl: '',
-        price: '8.99',
+        price: '1.99',
         qty: 0
     },
+    // {
+    //     id: 17,
+    //     type: 'desserts',
+    //     item: 'vanilla and chocolet cookie',
+    //     desc: 'when she like both',
+    //     imgUrl: '',
+    //     price: '8.99',
+    //     qty: 0
+    // },
     {
-        id: 1,
+        id: 17,
         type: 'sides',
         item: 'french frys',
         desc: '',
@@ -175,7 +184,7 @@ let menuItems = [
         qty: 0
     },
     {
-        id: 2,
+        id: 18,
         type: 'sides',
         item: 'corn',
         desc: '',
@@ -184,7 +193,7 @@ let menuItems = [
         qty: 0
     },
     {
-        id: 3,
+        id: 19,
         type: 'sides',
         item: 'macaroni and cheese',
         desc: '',
@@ -193,7 +202,7 @@ let menuItems = [
         qty: 0
     },
     {
-        id: 4,
+        id: 20,
         type: 'sides',
         item: 'broccoli',
         desc: '',
@@ -206,8 +215,30 @@ let menuItems = [
 // confirm button
 confirmBtn.addEventListener('click', (e)=>{
     e.preventDefault()
-    console.log('click')
+    getTotal()
 })
+
+// getTotal()
+const getTotal = ()=> {
+    const subtotal = parseFloat(cartSubtotal.innerText)
+    const tipAmt = parseFloat(document.getElementById('tipAmt').value)
+    const otherAmt = parseFloat(document.getElementById('otherAmt').value)
+    const yourTip = document.getElementById('yourTip')
+    const theSubtotal = document.getElementById('theSubtotal')
+    const taxDisplay = document.getElementById('tax')
+
+    let taxTotal = subtotal * tax
+
+    let receiptTip = isNaN(tipAmt) ? otherAmt : (subtotal * tipAmt)
+
+    let total = isNaN(tipAmt) ? subtotal + otherAmt + taxTotal : 
+    receiptTip + subtotal + taxTotal
+
+    theSubtotal.innerText = subtotal
+    taxDisplay.innerText = taxTotal.toFixed(2)
+    yourTip.innerText = receiptTip.toFixed(2)
+    totalDisplay.innerText = total.toFixed(2)
+}
 
 // load the menu items
 // make rows
@@ -319,7 +350,10 @@ cartButtons.forEach(button => {
         for (let i = 0; i < menuItems.length; i++) {
             menuItems[i].id === id ? qty = menuItems[i].qty : null
         }
-        addItems(price, qty, item, id)
+
+        if (button.getAttribute('data-qty') > 0) {
+            addItems(price, qty, item, id)
+        }
     })
 })
 
@@ -366,12 +400,12 @@ const makeReceipt = (obj, el)=> {
     const itemSubtotal = document.createElement('td')
     itemSubtotal.classList.add('item-subtotal', 'text-center')
     itemSubtotal.setAttribute('id', `subTotal${obj.id}`)
-    itemSubtotal.innerText
+    itemSubtotal.innerText = obj.itemTotal.toFixed(2)
 
     tableRow.appendChild(receiptChoice)
     tableRow.appendChild(receiptQty)
     tableRow.appendChild(receiptPrice)
-    tableRow.appendChild(itemsSubtotal)
+    tableRow.appendChild(itemSubtotal)
 
     el.appendChild(tableRow)
 
@@ -382,31 +416,33 @@ const btnSubtract = document.querySelectorAll('.btn-subtract')
 const btnAdd = document.querySelectorAll('.btn-add')
 
 btnSubtract.forEach(button => {
-    button.addEventListener(button.getAttribute('data-id'))
-    const spanQty = document.getElementById(`quantity${btnId}`)
+    button.addEventListener('click', ()=> {
+        const btnId = parseFloat(button.getAttribute('data-id'))
+        const spanQty = document.getElementById(`quantity${btnId}`)
 
-    for (let i = 0; i < menuItems.length; i++) {
-        if (menuItems[i].id === btnId && menuItems[i].qty > 0) {
-            menuItems[i].qty-= 1
-            spanQty.innerText = menuItems[i].qty
+        for (let i = 0; i < menuItems.length; i++) {
+            if (menuItems[i].id === btnId && menuItems[i].qty > 0) {
+                menuItems[i].qty-= 1
+                spanQty.innerText = menuItems[i].qty
+            }
         }
-    }
+    })
 })
 
 btnAdd.forEach(button => {
     button.addEventListener('click', ()=> {
-
-    }
         const btnId = parseFloat(button.getAttribute('data-id'))
         const spanQty = document.getElementById(`quantity${btnId}`)
 
         for (let i = 0; i < menuItems.length; i++) {
             if (menuItems[i].id === btnId
                 && menuItems[i].qty < 20
-                && cartButtons[i].CDATA_SECTION_NODE.id == btnId
+                && cartButtons[i].dataset.id == btnId
             ) {
-
+                menuItems[i].qty+=1
+                cartButtons[i].setAttribute('data-qty', menuItems[i].qty)
+                spanQty.innerText = menuItems[i].qty
             }
         }
-    )
+    })
 })
